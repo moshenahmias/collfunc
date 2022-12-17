@@ -27,7 +27,7 @@ Output:
 func main() {
 	first := []int{0, 2, 4, 6}
 	second := []int{1, 3, 5, 7}
-    fmt.Println(collfunc.ToSlice[int](collfunc.Zip[int](first, second)))
+	fmt.Println(collfunc.ToSlice[int](collfunc.Zip[int](first, second)))
 }
 ```
 Output:
