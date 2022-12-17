@@ -102,3 +102,21 @@ func TestAccumulate(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestOne(t *testing.T) {
+	if collfunc.One[int]([]int{3, 2, 1}) != 3 {
+		t.FailNow()
+	}
+}
+
+func TestOneEndOfIteration(t *testing.T) {
+	defer func() {
+		if r := recover(); r == nil {
+			t.FailNow()
+		}
+	}()
+
+	if collfunc.One[int](collfunc.Empty[int]()) != 3 {
+		t.FailNow()
+	}
+}

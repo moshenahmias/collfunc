@@ -119,17 +119,17 @@ func Zip[T any](first, second any) func() (T, bool) {
 	return func() (T, bool) {
 		i = (i + 1) % 2
 		vj, okj := iter[i]()
+		v := vi
 
-		var v T
 		var ok bool
 
 		if oki {
-			v, ok = vi, oki
+			ok = oki
 		} else {
-			v, ok = vi, okj
+			ok = okj
 		}
 
-		vi, vj, oki, okj = vj, vi, okj, oki
+		vi, oki = vj, okj
 
 		return v, ok
 	}
@@ -197,4 +197,14 @@ func Compare[T constraints.Ordered](first, second any) int {
 	}
 
 	return 0
+}
+
+func One[T any](collection any) T {
+	iter := Iterate[T](collection)
+
+	if v, ok := iter(); ok {
+		return v
+	}
+
+	panic("collfunc: end of iteration")
 }
